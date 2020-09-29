@@ -9,6 +9,7 @@
     <FrameLayout
         android:id="@+id/frame_fragment"
         android:layout_width="match_parent"
+        android:background="#E2E8A2"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
