@@ -12,21 +12,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.pvhn.studentsmanager.R;
 import com.pvhn.studentsmanager.callbackinterface.CallBack;
 import com.pvhn.studentsmanager.model.ClassModel;
-import com.pvhn.studentsmanager.model.StudentModel;
 
-import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
 public class ShowClassAdapter extends RecyclerView.Adapter<ShowClassAdapter.HungHolder> {
     private RealmResults<ClassModel> dataClass;
     private CallBack itemsClick;
+    private CallBack itemsLongClick;
 
-    public ShowClassAdapter(RealmResults<ClassModel> dataClass, CallBack itemsClick) {
+    public ShowClassAdapter(RealmResults<ClassModel> dataClass, CallBack itemsClick, CallBack itemsLongClick) {
         this.dataClass = dataClass;
         this.itemsClick = itemsClick;
+        this.itemsLongClick = itemsLongClick;
     }
-
-
 
     public class HungHolder extends RecyclerView.ViewHolder {
         TextView tvShowClassName;
@@ -34,6 +32,13 @@ public class ShowClassAdapter extends RecyclerView.Adapter<ShowClassAdapter.Hung
         public HungHolder(@NonNull View itemView) {
             super(itemView);
             tvShowClassName = itemView.findViewById(R.id.tv_show_class_name);
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    itemsLongClick.ItemsLongClick(getAdapterPosition());
+                    return false;
+                }
+            });
         }
 
     }
@@ -54,6 +59,7 @@ public class ShowClassAdapter extends RecyclerView.Adapter<ShowClassAdapter.Hung
                 itemsClick.ItemsClick(position);
             }
         });
+
     }
 
     @Override

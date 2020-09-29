@@ -1,5 +1,6 @@
 package com.pvhn.studentsmanager.fragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBar;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.pvhn.studentsmanager.R;
 import com.pvhn.studentsmanager.adapter.ShowStudentsAdapter;
+import com.pvhn.studentsmanager.callbackinterface.CallBack;
 import com.pvhn.studentsmanager.model.ClassModel;
 import com.pvhn.studentsmanager.model.StudentModel;
 
@@ -30,7 +32,7 @@ import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
 
-public class StudentsFragment extends Fragment implements View.OnClickListener {
+public class StudentsFragment extends Fragment implements View.OnClickListener, CallBack {
     private RecyclerView rcvListStudent;
     private FloatingActionButton btnAddStudent;
     private ShowStudentsAdapter studentsAdapter;
@@ -62,7 +64,7 @@ public class StudentsFragment extends Fragment implements View.OnClickListener {
     }
 
     private void setAdapter(RealmResults<StudentModel> results) {
-        studentsAdapter = new ShowStudentsAdapter(results);
+        studentsAdapter = new ShowStudentsAdapter(results, this);
         rcvListStudent.setAdapter(studentsAdapter);
         studentsAdapter.notifyDataSetChanged();
 
@@ -147,5 +149,34 @@ public class StudentsFragment extends Fragment implements View.OnClickListener {
                 dialog.dismiss();
             }
         });
+    }
+
+    @Override
+    public void ItemsClick(int position) {
+
+    }
+
+    @Override
+    public void ItemsLongClick(final int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage("Are you sure you want to Delete ?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        realm.beginTransaction();
+                        dataStudent.deleteFromRealm(position);
+                        realm.commitTransaction();
+                        Toast.makeText(getActivity(), "Delete Student Successful", Toast.LENGTH_LONG).show();
+                        studentsAdapter.notifyDataSetChanged();
+                        dialog.cancel();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }

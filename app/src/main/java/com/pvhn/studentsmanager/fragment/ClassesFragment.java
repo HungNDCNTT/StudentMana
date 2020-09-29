@@ -1,5 +1,7 @@
 package com.pvhn.studentsmanager.fragment;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -58,7 +60,7 @@ public class ClassesFragment extends Fragment implements View.OnClickListener, C
     }
 
     private void setAdapter(RealmResults<ClassModel> results) {
-        classAdapter = new ShowClassAdapter(results, this);
+        classAdapter = new ShowClassAdapter(results, this, this);
         rcvListClass.setAdapter(classAdapter);
         classAdapter.notifyDataSetChanged();
 
@@ -103,8 +105,7 @@ public class ClassesFragment extends Fragment implements View.OnClickListener, C
                     realm.commitTransaction();
                     classAdapter.notifyDataSetChanged();
                     Toast.makeText(getActivity(), "Add class Successful !!", Toast.LENGTH_LONG).show();
-                }
-                else {
+                } else {
                     Toast.makeText(getActivity(), "Add class Fail !!", Toast.LENGTH_LONG).show();
                 }
                 dialog.dismiss();
@@ -138,4 +139,31 @@ public class ClassesFragment extends Fragment implements View.OnClickListener, C
         ((MainActivity) getActivity())
                 .showFragmentStudentsManager(dataClass.get(position));
     }
+
+    @Override
+    public void ItemsLongClick(final int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage("Are you sure you want to Delete ?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        realm.beginTransaction();
+                        dataClass.deleteFromRealm(position);
+                        realm.commitTransaction();
+                        Toast.makeText(getActivity(), "Delete Class Successful", Toast.LENGTH_LONG).show();
+                        classAdapter.notifyDataSetChanged();
+                        dialog.cancel();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+
+    }
+
+
 }

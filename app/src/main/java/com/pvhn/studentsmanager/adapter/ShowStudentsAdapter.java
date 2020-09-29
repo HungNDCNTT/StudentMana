@@ -9,15 +9,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pvhn.studentsmanager.R;
+import com.pvhn.studentsmanager.callbackinterface.CallBack;
 import com.pvhn.studentsmanager.model.StudentModel;
 
 import io.realm.RealmResults;
 
 public class ShowStudentsAdapter extends RecyclerView.Adapter<ShowStudentsAdapter.HungHolderStudent> {
     private RealmResults<StudentModel> dataStudent;
+    private CallBack itemsLongClick;
 
-    public ShowStudentsAdapter(RealmResults<StudentModel> dataStudent) {
+    public ShowStudentsAdapter(RealmResults<StudentModel> dataStudent, CallBack itemsLongClick) {
         this.dataStudent = dataStudent;
+        this.itemsLongClick = itemsLongClick;
     }
 
     public class HungHolderStudent extends RecyclerView.ViewHolder {
@@ -29,6 +32,13 @@ public class ShowStudentsAdapter extends RecyclerView.Adapter<ShowStudentsAdapte
             tvStudentAge = itemView.findViewById(R.id.tv_student_age);
             tvStudentSex = itemView.findViewById(R.id.tv_student_sex);
             tvStudentAddress = itemView.findViewById(R.id.tv_student_address);
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    itemsLongClick.ItemsLongClick(getAdapterPosition());
+                    return false;
+                }
+            });
         }
     }
 
