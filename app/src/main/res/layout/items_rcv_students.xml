@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="24dp">
+
+    <ImageView
+        android:id="@+id/imv_avt"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_person" />
+
+    <TextView
+        android:id="@+id/tv_student_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="TextView"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/imv_avt"
+        app:layout_constraintTop_toTopOf="@+id/imv_avt" />
+
+    <TextView
+        android:id="@+id/tv_student_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/tv_student_name"
+        app:layout_constraintStart_toStartOf="@+id/tv_student_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_student_name" />
+
+    <TextView
+        android:id="@+id/tv_student_sex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/tv_student_age"
+        app:layout_constraintStart_toStartOf="@+id/tv_student_age"
+        app:layout_constraintTop_toBottomOf="@+id/tv_student_age" />
+
+    <TextView
+        android:id="@+id/tv_student_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/imv_avt"
+        app:layout_constraintEnd_toEndOf="@+id/tv_student_sex"
+        app:layout_constraintStart_toStartOf="@+id/tv_student_sex"
+        app:layout_constraintTop_toBottomOf="@+id/tv_student_sex" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tip_student_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/edt_student_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Enter student name"
+            android:inputType="textCapWords" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tip_student_age"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/tip_student_name"
+        app:layout_constraintStart_toStartOf="@+id/tip_student_name"
+        app:layout_constraintTop_toBottomOf="@+id/tip_student_name">
+
+        <EditText
+            android:id="@+id/edt_student_age"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Enter student age"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tip_student_sex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/tip_student_age"
+        app:layout_constraintStart_toStartOf="@+id/tip_student_age"
+        app:layout_constraintTop_toBottomOf="@+id/tip_student_age">
+
+        <EditText
+            android:id="@+id/edt_student_sex"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Enter student sex" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tip_student_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/tip_student_sex"
+        app:layout_constraintStart_toStartOf="@+id/tip_student_sex"
+        app:layout_constraintTop_toBottomOf="@+id/tip_student_sex">
+
+        <EditText
+            android:id="@+id/edt_student_address"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Enter student address" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_add_student"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/button_style"
+        android:text="ADD"
+        app:layout_constraintEnd_toStartOf="@+id/btn_cancel_student"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tip_student_address" />
+
+    <Button
+        android:id="@+id/btn_cancel_student"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_style"
+        android:text="Cancel"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_add_student"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_add_student"
+        app:layout_constraintTop_toTopOf="@+id/btn_add_student" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
