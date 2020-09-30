@@ -26,6 +26,7 @@ import com.pvhn.studentsmanager.R;
 import com.pvhn.studentsmanager.adapter.ShowClassAdapter;
 import com.pvhn.studentsmanager.callbackinterface.CallBack;
 import com.pvhn.studentsmanager.model.ClassModel;
+import com.pvhn.studentsmanager.model.StudentModel;
 
 import java.util.UUID;
 
@@ -134,7 +135,7 @@ public class ClassesFragment extends Fragment implements View.OnClickListener, C
                 .inflateTransition(android.R.transition.explode);
         setExitTransition(exitTransition);
         Transition enterTransition = TransitionInflater.from(getContext())
-                .inflateTransition(android.R.transition.fade);
+                .inflateTransition(android.R.transition.slide_top);
         setEnterTransition(enterTransition);
         ((MainActivity) getActivity())
                 .showFragmentStudentsManager(dataClass.get(position));

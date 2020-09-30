@@ -6,7 +6,7 @@ import io.realm.annotations.PrimaryKey;
 public class StudentModel extends RealmObject {
     @PrimaryKey
     String studentID;
-    String classID;
+    String classStID;
     String studentName;
     String studentAge;
     String studentAddress;
@@ -15,9 +15,9 @@ public class StudentModel extends RealmObject {
     public StudentModel() {
     }
 
-    public StudentModel(String studentID, String classID, String studentName, String studentAge, String studentAddress, String studentSex) {
+    public StudentModel(String studentID, String classStID, String studentName, String studentAge, String studentAddress, String studentSex) {
         this.studentID = studentID;
-        this.classID = classID;
+        this.classStID = classStID;
         this.studentName = studentName;
         this.studentAge = studentAge;
         this.studentAddress = studentAddress;
@@ -33,11 +33,11 @@ public class StudentModel extends RealmObject {
     }
 
     public String getClassID() {
-        return classID;
+        return classStID;
     }
 
     public void setClassID(String classID) {
-        this.classID = classID;
+        this.classStID = classID;
     }
 
     public String getStudentName() {

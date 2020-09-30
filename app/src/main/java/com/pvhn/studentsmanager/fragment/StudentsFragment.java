@@ -25,6 +25,7 @@ import com.pvhn.studentsmanager.callbackinterface.CallBack;
 import com.pvhn.studentsmanager.model.ClassModel;
 import com.pvhn.studentsmanager.model.StudentModel;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 import io.realm.Realm;
@@ -43,8 +44,6 @@ public class StudentsFragment extends Fragment implements View.OnClickListener, 
     public StudentsFragment(ClassModel classModel) {
         dataClass = classModel.getClassID();
     }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -58,7 +57,7 @@ public class StudentsFragment extends Fragment implements View.OnClickListener, 
     }
 
     private void getAllStudent() {
-        dataStudent = realm.where(StudentModel.class).findAll();
+        dataStudent = realm.where(StudentModel.class).equalTo("classStID",dataClass).findAll();
         setAdapter(dataStudent);
         studentsAdapter.notifyDataSetChanged();
     }
@@ -124,22 +123,27 @@ public class StudentsFragment extends Fragment implements View.OnClickListener, 
                     Toast.makeText(getActivity(), "Please Enter Student Address", Toast.LENGTH_LONG).show();
                     return;
                 }
-                if (checkExitsStudent == null) {
-                    StudentModel studentModel = new StudentModel();
-                    studentModel.setStudentID(randomUUID);
-                    studentModel.setClassID(dataClass);
-                    studentModel.setStudentName(edtStudentName.getText().toString());
-                    studentModel.setStudentAge(edtStudentAge.getText().toString());
-                    studentModel.setStudentSex(edtStudentSex.getText().toString());
-                    studentModel.setStudentAddress(edtStudentAddress.getText().toString());
-                    realm.beginTransaction();
-                    realm.copyToRealmOrUpdate(studentModel);
-                    realm.commitTransaction();
-                    studentsAdapter.notifyDataSetChanged();
-                    Toast.makeText(getActivity(), "Add Student Successful !!", Toast.LENGTH_LONG).show();
+                if (dataClass != null) {
+                    if (checkExitsStudent == null) {
+                        StudentModel studentModel = new StudentModel();
+                        studentModel.setStudentID(randomUUID);
+                        studentModel.setClassID(dataClass);
+                        studentModel.setStudentName(edtStudentName.getText().toString());
+                        studentModel.setStudentAge(edtStudentAge.getText().toString());
+                        studentModel.setStudentSex(edtStudentSex.getText().toString());
+                        studentModel.setStudentAddress(edtStudentAddress.getText().toString());
+                        realm.beginTransaction();
+                        realm.copyToRealmOrUpdate(studentModel);
+                        realm.commitTransaction();
+                        studentsAdapter.notifyDataSetChanged();
+                        Toast.makeText(getActivity(), "Add Student Successful !!", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getActivity(), "Add Student Fail !!", Toast.LENGTH_LONG).show();
+                    }
                 } else {
-                    Toast.makeText(getActivity(), "Add Student Fail !!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "This Class doesn't  exits !!", Toast.LENGTH_LONG).show();
                 }
+
                 dialog.dismiss();
             }
         });
