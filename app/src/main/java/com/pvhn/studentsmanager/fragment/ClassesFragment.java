@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.pvhn.studentsmanager.MainActivity;
 import com.pvhn.studentsmanager.R;
 import com.pvhn.studentsmanager.adapter.ShowClassAdapter;
@@ -94,7 +95,9 @@ public class ClassesFragment extends Fragment implements View.OnClickListener, C
                 String getClassName = edtClassName.getText().toString();
                 ClassModel checkExitsClass = realm.where(ClassModel.class).equalTo("className", getClassName).findFirst();
                 if (TextUtils.isEmpty(getClassName)) {
-                    Toast.makeText(getActivity(), "Please Enter Class Name", Toast.LENGTH_LONG).show();
+                    Snackbar snackbar = Snackbar
+                            .make(getView(), "Please Enter Class Name", Snackbar.LENGTH_LONG);
+                    snackbar.show();
                     return;
                 }
                 if (checkExitsClass == null) {
@@ -151,7 +154,9 @@ public class ClassesFragment extends Fragment implements View.OnClickListener, C
                         realm.beginTransaction();
                         dataClass.deleteFromRealm(position);
                         realm.commitTransaction();
-                        Toast.makeText(getActivity(), "Delete Class Successful", Toast.LENGTH_LONG).show();
+                        Snackbar snackbar = Snackbar
+                                .make(getView(), "Deleted successful !!", Snackbar.LENGTH_LONG);
+                        snackbar.show();
                         classAdapter.notifyDataSetChanged();
                         dialog.cancel();
                     }

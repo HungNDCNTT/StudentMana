@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.pvhn.studentsmanager.R;
 import com.pvhn.studentsmanager.adapter.ShowStudentsAdapter;
 import com.pvhn.studentsmanager.callbackinterface.CallBack;
@@ -44,6 +45,7 @@ public class StudentsFragment extends Fragment implements View.OnClickListener, 
     public StudentsFragment(ClassModel classModel) {
         dataClass = classModel.getClassID();
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -57,7 +59,7 @@ public class StudentsFragment extends Fragment implements View.OnClickListener, 
     }
 
     private void getAllStudent() {
-        dataStudent = realm.where(StudentModel.class).equalTo("classStID",dataClass).findAll();
+        dataStudent = realm.where(StudentModel.class).equalTo("classStID", dataClass).findAll();
         setAdapter(dataStudent);
         studentsAdapter.notifyDataSetChanged();
     }
@@ -111,16 +113,24 @@ public class StudentsFragment extends Fragment implements View.OnClickListener, 
 
                 StudentModel checkExitsStudent = realm.where(StudentModel.class).equalTo("studentID", randomUUID).findFirst();
                 if (TextUtils.isEmpty(edtStudentName.getText().toString())) {
-                    Toast.makeText(getActivity(), "Please Enter Student Name", Toast.LENGTH_LONG).show();
+                    Snackbar snackbar = Snackbar
+                            .make(getView(), "Please Enter Student Name", Snackbar.LENGTH_LONG);
+                    snackbar.show();
                     return;
                 } else if (TextUtils.isEmpty(edtStudentAge.getText().toString())) {
-                    Toast.makeText(getActivity(), "Please Enter Student Age", Toast.LENGTH_LONG).show();
+                    Snackbar snackbar = Snackbar
+                            .make(getView(), "Please Enter Student Age", Snackbar.LENGTH_LONG);
+                    snackbar.show();
                     return;
                 } else if (TextUtils.isEmpty(edtStudentSex.getText().toString())) {
-                    Toast.makeText(getActivity(), "Please Enter Student Sex", Toast.LENGTH_LONG).show();
+                    Snackbar snackbar = Snackbar
+                            .make(getView(), "Please Enter Student Sex", Snackbar.LENGTH_LONG);
+                    snackbar.show();
                     return;
                 } else if (TextUtils.isEmpty(edtStudentAddress.getText().toString())) {
-                    Toast.makeText(getActivity(), "Please Enter Student Address", Toast.LENGTH_LONG).show();
+                    Snackbar snackbar = Snackbar
+                            .make(getView(), "Please Enter Student Address", Snackbar.LENGTH_LONG);
+                    snackbar.show();
                     return;
                 }
                 if (dataClass != null) {
@@ -141,7 +151,9 @@ public class StudentsFragment extends Fragment implements View.OnClickListener, 
                         Toast.makeText(getActivity(), "Add Student Fail !!", Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    Toast.makeText(getActivity(), "This Class doesn't  exits !!", Toast.LENGTH_LONG).show();
+                    Snackbar snackbar = Snackbar
+                            .make(getView(), "This class doesn't exits", Snackbar.LENGTH_LONG);
+                    snackbar.show();
                 }
 
                 dialog.dismiss();
